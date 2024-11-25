@@ -1,5 +1,7 @@
 import { Octokit, App } from "octokit";
 import { db } from "~/server/db";
+import axios from "axios";
+import { AISummarizeCommits } from "./gemini";
 
 export const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,
@@ -18,10 +20,16 @@ type Response = {
 export const gitCommitHashes = async (
   githubUrl: string,
 ): Promise<Response[]> => {
+  const [owner, repo] = githubUrl.split("/").slice(-2);
+  if (!owner || !repo) {
+    throw new Error("Invalid github url");
+  }
+
   const { data } = await octokit.rest.repos.listCommits({
-    owner: "docker",
-    repo: "genai-stack",
+    owner,
+    repo,
   });
+
   const sortedCommits = data.sort(
     (a: any, b: any) =>
       new Date(b.commit.author.date).getTime() -
@@ -52,9 +60,44 @@ export const pullCommits = async (projectId: string) => {
     commitHashes,
     projectId,
   );
-  console.log(unprocessedCommits);
-  return unprocessedCommits;
+  const summaryResponses = await Promise.allSettled(
+    unprocessedCommits.map((commit) => {
+      return summarizeCommits(githubUrl, commit.commitHash);
+    }),
+  );
+  const summaries = summaryResponses.map((summary) => {
+    if (summary.status === "fulfilled") {
+      return summary.value as string;
+    }
+    return "";
+  });
+
+  const commits = await db.commit.createMany({
+    data: summaries.map((summary, index) => {
+      return {
+        projectId: projectId,
+        commitHash: unprocessedCommits[index]!.commitHash,
+        commitMessage: unprocessedCommits[index]!.commitMessage,
+        commitAuthorName: unprocessedCommits[index]!.commitAuthorName,
+        commitAuthorAvatar: unprocessedCommits[index]!.commitAuthorAvatar,
+        commitDate: unprocessedCommits[index]!.commitDate,
+        summary,
+      };
+    }),
+  });
+
+  return commits;
 };
+
+async function summarizeCommits(githubUrl: string, commitHash: string) {
+  // get diff pass it to AI return summary
+  const { data } = await axios.get(`${githubUrl}/commit/${commitHash}.diff`, {
+    headers: {
+      Accept: "application/vnd.github.v3.diff",
+    },
+  });
+  return (await AISummarizeCommits(data)) || "";
+}
 
 async function fetchProjectGithubUrl(projectId: string) {
   const project = await db.project.findUnique({
@@ -83,4 +126,4 @@ async function filterUnprocessedCommits(
   return unprocessedCommits;
 }
 
-await pullCommits("cm3w7e62d0000zf84hzjjem7k").then(console.log);
+await pullCommits("cm3xi9jbj0000r4czd3ozycqa").then(console.log);

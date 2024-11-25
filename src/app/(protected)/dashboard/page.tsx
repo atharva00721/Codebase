@@ -13,13 +13,14 @@ import {
 } from "~/components/ui/card";
 import { ExternalLinkIcon, Github } from "lucide-react";
 import Link from "next/link";
+import CommitBox from "./_components/commit-box";
 
 const DashboardPage = () => {
   const { project, projectId, setprojectId } = useProject();
 
   return (
     <div className="w-full">
-      <div className="flex w-full flex-wrap items-center justify-between gap-y-4 px-1 ">
+      <div className="flex w-full flex-wrap items-center justify-between gap-y-4 px-1">
         <div className="flex w-fit rounded-md bg-purple-400 px-4 py-3">
           <Github className="size-5 text-white" />
           <div className="ml-2">
@@ -63,6 +64,7 @@ const DashboardPage = () => {
           </Card>
         </div>
       </div>
+      <CommitBox />
     </div>
     // <Card className="w-full">
     //   <CardHeader className="flex flex-col items-start space-y-0 border-b p-0 sm:flex-row">
