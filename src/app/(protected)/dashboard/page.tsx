@@ -11,19 +11,68 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import { ExternalLinkIcon, Github } from "lucide-react";
+import Link from "next/link";
 
-export default function dashboard() {
+const DashboardPage = () => {
   const { project, projectId, setprojectId } = useProject();
 
   return (
-    <Card className="w-full">
-      <CardHeader className="flex flex-col items-start space-y-0 border-b p-0 sm:flex-row">
-        <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-          <CardTitle className="capitalize">{project?.name}</CardTitle>
-          <CardDescription>{project?.id}</CardDescription>
+    <div className="w-full">
+      <div className="flex w-full flex-wrap items-center justify-between gap-y-4 px-1 ">
+        <div className="flex w-fit rounded-md bg-purple-400 px-4 py-3">
+          <Github className="size-5 text-white" />
+          <div className="ml-2">
+            <p className="text-sm font-medium text-primary">
+              This Project is Linked to{" "}
+              <Link
+                href={project?.githubUrl ?? ""}
+                className="inline-flex items-center text-white/80 hover:underline"
+              >
+                {project?.name}
+                <ExternalLinkIcon className="ml-1 size-3 text-white" />
+              </Link>
+            </p>
+          </div>
         </div>
-      </CardHeader>
-      <CardContent className="px-2 sm:p-6">hello</CardContent>
-    </Card>
+
+        <div className="h-4"></div>
+
+        <div>Invite Button</div>
+      </div>
+
+      <div className="mt-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-5">
+          <Card className="rounded-lg sm:col-span-3">
+            <CardHeader className="flex flex-col items-start space-y-0 border-b p-0 sm:flex-row">
+              <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
+                <CardTitle className="capitalize">Ask Questions</CardTitle>
+                <CardDescription>{project?.id}</CardDescription>
+              </div>
+            </CardHeader>
+            <CardContent className="px-2 sm:p-6">hello</CardContent>
+          </Card>
+          <Card className="rounded-lg sm:col-span-2">
+            <CardHeader className="flex flex-col items-start space-y-0 border-b p-0 sm:flex-row">
+              <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
+                <CardTitle className="capitalize">{project?.name}</CardTitle>
+                <CardDescription>{project?.id}</CardDescription>
+              </div>
+            </CardHeader>
+            <CardContent className="px-2 sm:p-6">hello</CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+    // <Card className="w-full">
+    //   <CardHeader className="flex flex-col items-start space-y-0 border-b p-0 sm:flex-row">
+    //     <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
+    //       <CardTitle className="capitalize">{project?.name}</CardTitle>
+    //       <CardDescription>{project?.id}</CardDescription>
+    //     </div>
+    //   </CardHeader>
+    //   <CardContent className="px-2 sm:p-6">hello</CardContent>
+    // </Card>
   );
-}
+};
+export default DashboardPage;
