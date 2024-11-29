@@ -35,7 +35,8 @@
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%}
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -68,7 +69,8 @@
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%}
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -78,8 +80,8 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 @layer base {
   * {
@@ -88,4 +90,175 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.radial {
+  background-image: radial-gradient(
+    ellipse farthest-side,
+    white,
+    #716768,
+    black
+  );
+  background-size: 100% 90%;
+  background-repeat: no-repeat;
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #4a4e58, white, #716768);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-radial {
+  background-image: radial-gradient(
+    ellipse farthest-side,
+    rgba(113, 103, 104, 0.2) 30%,
+    black 70%
+  );
+  background-size: 100% 50%;
+  background-repeat: no-repeat;
+}
+
+.text-radial--circle {
+  background-image: radial-gradient(
+    circle farthest-side,
+    rgba(113, 103, 104, 0.35) 20%,
+    black 70%
+  );
+  background-size: 50% 70%;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+.backdrop--blur__safari {
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.radial--blur {
+  -webkit-backdrop-filter: blur(100px);
+  filter: blur(100px);
+  background: #877874;
+}
+
+@media only screen and (max-width: 800px) {
+  .text-radial--circle {
+    background-image: radial-gradient(
+      circle farthest-side,
+      rgba(113, 103, 104, 0.2) 20%,
+      black 70%
+    );
+    background-size: 100% 50%;
+    background-repeat: no-repeat;
+    background-position: top center;
+  }
+}
+
+.swiper-autoheight .swiper-slide {
+  height: 100% !important;
+}
+
+.content-width-slide {
+  width: fit-content !important;
+}
+
+.img--overlay {
+  background-image: -webkit-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 1)
+  ); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+  background-image: -moz-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 1)
+  ); /* For Firefox (3.6 to 15) */
+  background-image: -o-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 1)
+  ); /* For old Opera (11.1 to 12.0) */
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 1)
+  ); /* Standard syntax; must be last */
+}
+
+.slider-overlay {
+  background-image: -webkit-linear-gradient(
+    to right,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0)
+  ); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+  background-image: -moz-linear-gradient(
+    to right,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0)
+  ); /* For Firefox (3.6 to 15) */
+  background-image: -o-linear-gradient(
+    to right,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0)
+  ); /* For old Opera (11.1 to 12.0) */
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0)
+  ); /* Standard syntax; must be last */
+}
+
+.slider-overlay-rev {
+  background-image: -webkit-linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 1)
+  ); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+  background-image: -moz-linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 1)
+  ); /* For Firefox (3.6 to 15) */
+  background-image: -o-linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 1)
+  ); /* For old Opera (11.1 to 12.0) */
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 1)
+  ); /* Standard syntax; must be last */
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.glassmorphism2 {
+  background: rgba(18, 17, 17, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(8px);
 }

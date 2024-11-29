@@ -19,7 +19,7 @@ const DashboardPage = () => {
   const { project, projectId, setprojectId } = useProject();
 
   return (
-    <div className="w-full">
+    <div className="flex w-full flex-col gap-y-4 p-1">
       <div className="flex w-full flex-wrap items-center justify-between gap-y-4 px-1">
         <div className="flex w-fit rounded-md bg-purple-400 px-4 py-3">
           <Github className="size-5 text-white" />
