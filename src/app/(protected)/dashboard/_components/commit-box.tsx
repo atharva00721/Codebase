@@ -13,9 +13,18 @@ import Image from "next/image";
 import GlassCard from "~/components/glass-card";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
+import useRefetch from "~/hooks/use-refetch";
+
 const CommitBox = () => {
+  const refetch = useRefetch();
   const { projectId, project } = useProject();
-  const { data: commits } = api.project.getCommits.useQuery({ projectId });
+  const { data: commits, refetch: refetchCommits } = api.project.getCommits.useQuery({ projectId });
+
+  React.useEffect(() => {
+    if (commits) {
+      refetch();
+    }
+  }, [commits, refetch]);
   return (
     <div>
       <ul className="space-y-6">
@@ -54,7 +63,7 @@ const CommitBox = () => {
                       </span>
                     </Link>
                   </CardTitle>
-                  <CardDescription className="text-md font-semibold leading-5 text-primary/60">
+                  <CardDescription className="text-md font-semibold leading-5 text-primary">
                     {commit.commitMessage}
                   </CardDescription>
                 </CardHeader>
