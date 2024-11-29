@@ -1,6 +1,7 @@
 import { error } from "console";
 import { z } from "zod";
 import { pullCommits } from "~/lib/github";
+import { indexGithubRepo } from "~/lib/github-loader";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
 export const projectRouter = createTRPCRouter({
@@ -25,6 +26,7 @@ export const projectRouter = createTRPCRouter({
           },
         },
       });
+      await indexGithubRepo(project.id, input.repoUrl, input.githubToken);
       await pullCommits(project.id);
       return project;
     }),
@@ -52,14 +54,14 @@ export const projectRouter = createTRPCRouter({
       } catch (err) {
         console.error("Failed to pull commits:", err);
       }
-      
+
       return await ctx.db.commit.findMany({
         where: {
           projectId: input.projectId,
         },
         orderBy: {
-          commitDate: 'desc'
-        }
+          commitDate: "desc",
+        },
       });
     }),
 });

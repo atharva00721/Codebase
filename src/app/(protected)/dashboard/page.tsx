@@ -14,6 +14,7 @@ import {
 import { ExternalLinkIcon, Github } from "lucide-react";
 import Link from "next/link";
 import CommitBox from "./_components/commit-box";
+import GlassCard from "~/components/glass-card";
 
 const DashboardPage = () => {
   const { project, projectId, setprojectId } = useProject();
@@ -44,7 +45,7 @@ const DashboardPage = () => {
 
       <div className="mt-4">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-5">
-          <Card className="rounded-lg sm:col-span-3">
+          <GlassCard className="rounded-lg sm:col-span-3 border-none">
             <CardHeader className="flex flex-col items-start space-y-0 border-b p-0 sm:flex-row">
               <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
                 <CardTitle className="capitalize">Ask Questions</CardTitle>
@@ -52,8 +53,8 @@ const DashboardPage = () => {
               </div>
             </CardHeader>
             <CardContent className="px-2 sm:p-6">hello</CardContent>
-          </Card>
-          <Card className="rounded-lg sm:col-span-2">
+          </GlassCard>
+          <GlassCard className="rounded-lg sm:col-span-2 border-none">
             <CardHeader className="flex flex-col items-start space-y-0 border-b p-0 sm:flex-row">
               <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
                 <CardTitle className="capitalize">{project?.name}</CardTitle>
@@ -61,7 +62,7 @@ const DashboardPage = () => {
               </div>
             </CardHeader>
             <CardContent className="px-2 sm:p-6">hello</CardContent>
-          </Card>
+          </GlassCard>
         </div>
       </div>
       <CommitBox />
