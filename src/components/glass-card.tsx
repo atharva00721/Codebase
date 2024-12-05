@@ -11,7 +11,7 @@ const GlassCard = ({ children, className }: Props) => {
     <Card
       className={cn(
         className,
-        "bg-background border-foreground/30 backdrop--blur__safari backdrop-blur-4xl rounded-xl bg-opacity-40 bg-clip-padding backdrop-filter",
+        "backdrop--blur__safari backdrop-blur-4xl rounded-xl bg-background bg-opacity-40 bg-clip-padding backdrop-filter",
       )}
     >
       {children}

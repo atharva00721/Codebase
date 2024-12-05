@@ -15,24 +15,25 @@ import { ExternalLinkIcon, Github } from "lucide-react";
 import Link from "next/link";
 import CommitBox from "./_components/commit-box";
 import GlassCard from "~/components/glass-card";
+import { Button } from "~/components/ui/button";
 
 const DashboardPage = () => {
   const { project, projectId, setprojectId } = useProject();
 
   return (
     <div className="flex w-full flex-col gap-y-4 p-1">
-      <div className="flex w-full flex-wrap items-center justify-between gap-y-4 px-1">
-        <div className="flex w-fit rounded-md bg-purple-400 px-4 py-3">
-          <Github className="size-5 text-white" />
+      <div className="flex w-full flex-wrap items-center justify-between gap-y-4">
+        <div className="flex w-fit rounded-md bg-purple-400 px-4 py-3 text-white dark:text-themeDarkGray">
+          <Github className="size-5" />
           <div className="ml-2">
             <p className="text-sm font-medium text-primary">
               This Project is Linked to{" "}
               <Link
                 href={project?.githubUrl ?? ""}
-                className="inline-flex items-center text-white/80 hover:underline"
+                className="inline-flex items-center hover:underline"
               >
                 {project?.name}
-                <ExternalLinkIcon className="ml-1 size-3 text-white" />
+                <ExternalLinkIcon className="ml-1 size-3" />
               </Link>
             </p>
           </div>
@@ -40,12 +41,12 @@ const DashboardPage = () => {
 
         <div className="h-4"></div>
 
-        <div>Invite Button</div>
+        <Button className="dark:bg-themeBlack bg-white text-themeBlack dark:text-white hover:bg-white/50">Invite Button</Button>
       </div>
 
-      <div className="mt-4">
+      <div className="mt-2">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-5">
-          <GlassCard className="rounded-lg sm:col-span-3 border-none">
+          <GlassCard className="rounded-lg border-none sm:col-span-3">
             <CardHeader className="flex flex-col items-start space-y-0 border-b p-0 sm:flex-row">
               <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
                 <CardTitle className="capitalize">Ask Questions</CardTitle>
@@ -54,7 +55,7 @@ const DashboardPage = () => {
             </CardHeader>
             <CardContent className="px-2 sm:p-6">hello</CardContent>
           </GlassCard>
-          <GlassCard className="rounded-lg sm:col-span-2 border-none">
+          <GlassCard className="rounded-lg border-none sm:col-span-2">
             <CardHeader className="flex flex-col items-start space-y-0 border-b p-0 sm:flex-row">
               <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
                 <CardTitle className="capitalize">{project?.name}</CardTitle>
@@ -65,7 +66,9 @@ const DashboardPage = () => {
           </GlassCard>
         </div>
       </div>
-      <CommitBox />
+      <div className="pb-5">
+        <CommitBox />
+      </div>
     </div>
     // <Card className="w-full">
     //   <CardHeader className="flex flex-col items-start space-y-0 border-b p-0 sm:flex-row">

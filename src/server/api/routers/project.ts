@@ -26,7 +26,7 @@ export const projectRouter = createTRPCRouter({
           },
         },
       });
-      await indexGithubRepo(project.id, input.repoUrl, input.githubToken);
+      // await indexGithubRepo(project.id, input.repoUrl, input.githubToken);
       await pullCommits(project.id);
       return project;
     }),

@@ -5,8 +5,10 @@ import { db } from "~/server/db";
 
 class GitHubRateLimitError extends Error {
   constructor() {
-    super('GitHub API rate limit exceeded. Please provide a GitHub token for higher rate limits.');
-    this.name = 'GitHubRateLimitError';
+    super(
+      "GitHub API rate limit exceeded. Please provide a GitHub token for higher rate limits.",
+    );
+    this.name = "GitHubRateLimitError";
   }
 }
 
@@ -14,30 +16,24 @@ export const loadGithubRepo = async (
   githubUrl: string,
   githubToken?: string,
 ) => {
-  try {
-    const loader = new GithubRepoLoader(githubUrl, {
-      accessToken: githubToken || "",
-      branch: "main",
-      ignoreFiles: [
-        "pnpm-lock.yaml",
-        "package-lock.json",
-        "yarn.lock",
-        "bun.lockb",
-        "dist",
-        "build",
-      ],
-      recursive: true,
-      unknown: "warn",
-      maxConcurrency: 5,
-    });
-    return await loader.load();
-  } catch (error: any) {
-    if (error.message?.includes('API rate limit exceeded')) {
-      throw new GitHubRateLimitError();
-    }
-    throw error;
-  }
-}
+  const loader = new GithubRepoLoader(githubUrl, {
+    accessToken: githubToken || "",
+    branch: "main",
+    ignoreFiles: [
+      "pnpm-lock.yaml",
+      "package-lock.json",
+      "yarn.lock",
+      "bun.lockb",
+    ],
+    recursive: true,
+    unknown: "warn",
+    maxConcurrency: 5,
+  });
+  const docs = await loader.load();
+  return docs;
+};
+
+// console.log(await loadGithubRepo("https://github.com/atharva00721/Codebase"));
 
 const generateEmbeddings = async (docs: Document[]) => {
   return await Promise.all(
@@ -54,6 +50,12 @@ const generateEmbeddings = async (docs: Document[]) => {
     }),
   );
 };
+export const logGithubRepoEmbeddings = async (githubUrl: string, githubToken?: string) => {
+  const docs = await loadGithubRepo(githubUrl, githubToken);
+  // const allEmbeddings = await generateEmbeddings(docs);
+  console.log(docs);
+};
+console.log(await logGithubRepoEmbeddings("https://github.com/atharva00721/Aether-Learn"));
 
 export const indexGithubRepo = async (
   projectId: string,
@@ -80,7 +82,5 @@ export const indexGithubRepo = async (
     UPDATE "sourceCodeEmbedding"
     SET "summaryEmbedding" = ${embedding.embedding}::vector
     WHERE "id" = ${sourceCodeEmbedding.id}`;
-
-    
   }
 };

@@ -61,12 +61,18 @@ export const summariseCode = async (doc: Document) => {
   return response.response.text();
 };
 
-export async function generateEmbedding(summary: string) {
-  const model = genAI.getGenerativeModel({ model: "text-embedding-004" });
+// export const summarizeCodebase = async (contents: string) => {
+//   const response = await model.generateContent([
+//     `Summarize this code.\n\nOriginal file contents:\n\n${contents}`
+//   ]);
+//   return response.response.text();
+// };
 
+export async function generateEmbedding(summary: string) {
+  const model = genAI.getGenerativeModel({
+    model: "text-embedding-004",
+  });
   const result = await model.embedContent(summary);
   const embedding = result.embedding;
   return embedding.values;
 }
-
-console.log(await generateEmbedding("This is a test"));

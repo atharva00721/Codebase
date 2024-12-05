@@ -2,15 +2,13 @@
 
 import * as React from "react";
 import {
-  BookOpen,
   Bot,
   CreditCardIcon,
   LayoutDashboardIcon,
   PresentationIcon,
-  SquareTerminal,
 } from "lucide-react";
 import { NavMain } from "~/components/nav-main";
-import { NavProjects } from "~/components/nav-projects";
+
 import {
   Sidebar,
   SidebarContent,
@@ -22,7 +20,8 @@ import {
 } from "~/components/ui/sidebar";
 import { useUser } from "@clerk/nextjs";
 import { ModeToggle } from "./theme-toggle";
-import useProject from "~/hooks/useProject";
+import { ProjectSwitcher } from "./project-switcher";
+
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { user } = useUser();
@@ -57,27 +56,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     ],
   };
   return (
-    <Sidebar variant="inset" {...props} collapsible="icon">
+    <Sidebar variant="floating" {...props} collapsible="icon">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
-                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <SquareTerminal className="size-6" />
-                </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">CodeBase</span>
-                  <span className="truncate text-xs">by Aether</span>
-                </div>
-              </a>
+              <ProjectSwitcher />
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={iteams.navMain} />
-        <NavProjects />
       </SidebarContent>
       <SidebarFooter>
         <ModeToggle />

@@ -1,5 +1,6 @@
 import { UserButton } from "@clerk/nextjs";
 import { AppSidebar } from "~/components/app-sidebar";
+import CreateProject from "~/components/createproject";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -24,17 +25,20 @@ const SidebarLayout = ({ children }: Props) => {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="h-22 flex shrink-0 items-center gap-2 p-2">
-          <div className="border-sidebar-border bg-sidebar flex w-full items-center justify-between gap-2 rounded-lg border p-2 px-4 shadow">
+        <header className="flex h-20 shrink-0 items-center p-2">
+          <div className="flex w-full items-center justify-between gap-2 rounded-lg border border-sidebar-border bg-sidebar p-2 px-4 shadow">
             <div className="flex items-center gap-2">
-              <SidebarTrigger className="-ml-1" />
+              <SidebarTrigger className="hover:glassmorphism2 -ml-1" />
               <Separator orientation="vertical" className="mr-2 h-4" />
             </div>
-            <UserButton />
+            <div className="flex items-center gap-4">
+              <CreateProject />
+              <UserButton />
+            </div>
           </div>
         </header>
         <main className="w-full p-2">
-          <div className="border-sidebar-border bg-sidebar no-scrollbar flex h-[calc(100vh-6rem)] gap-2 overflow-y-auto rounded-lg border p-4 shadow">
+          <div className="no-scrollbar flex h-[calc(100svh-6rem)] gap-2 overflow-y-auto rounded-lg border border-sidebar-border bg-sidebar p-4 shadow">
             {children}
           </div>
         </main>

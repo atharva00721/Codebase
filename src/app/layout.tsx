@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable}`}>
-        <body>
+        <body vaul-drawer-wrapper="">
           <TRPCReactProvider>
             <ThemeProvider
               attribute="class"

@@ -262,3 +262,8 @@
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(8px);
 }
+.glassmorphism3 {
+  background: rgba(18, 17, 17, 0.90);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(8px);
+}
