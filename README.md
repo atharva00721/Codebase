@@ -1,29 +1,86 @@
-# Create T3 App
+# Codebase AI
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+> **⚠️ Work in Progress**  
+> This project is currently under development. Some features may be incomplete or in testing.
 
-## What's next? How do I make an app with this?
+**Codebase AI** is an AI-powered web application that connects to GitHub repositories, summarizes commit histories, and provides insights into code usage. The app leverages cutting-edge technologies like Gemini, Assembly AI, and Octokit to enable efficient navigation, understanding, and exploration of complex codebases. Users can also interact with an AI chatbot to ask questions about repositories, files, and project contexts.
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Features
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- **AI-Powered Commit Summaries**: Automatically summarizes commit messages and provides detailed insights into code changes.
+- **GitHub Integration**: Seamlessly connects to GitHub repositories using the Octokit API.
+- **AI Chatbot**: Interact with an AI chatbot to ask questions about the repository and understand where files are used.
+- **Modern User Interface**: Designed with ShadCN for a responsive and user-friendly UI experience.
+- **Database Management**: Built using NeonDB and Prisma for high-performance data management.
+- **Natural Language Processing**: Powered by Assembly AI and Gemini for intelligent commit summaries and user interactions.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## Tech Stack
 
-## Learn More
+- **Next.js 15**: For building the server-side rendered web app.
+- **Gemini**: Used for generating intelligent commit summaries.
+- **Assembly AI**: Integrated for natural language processing and chatbot interactions.
+- **Octokit**: GitHub API client for seamless repository integration.
+- **NeonDB**: Managed database for fast and scalable data storage.
+- **Prisma**: ORM for database management and query building.
+- **ShadCN**: UI framework for building modern, responsive interfaces.
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## Setup and Installation
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+To get started with **Codebase AI**, follow these steps:
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+### Prerequisites
 
-## How do I deploy this?
+- Node.js (version 18 or higher)
+- A GitHub account and a personal access token to connect to repositories
+- A NeonDB account (for database management)
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/yourusername/codebase-ai.git
+cd codebase-ai
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up environment variables
+
+Create a `.env.local` file in the root of the project and add the following variables:
+
+```env
+NEXT_PUBLIC_GITHUB_TOKEN=your_github_token
+DATABASE_URL=your_neondb_connection_string
+ASSEMBLY_AI_API_KEY=your_assembly_ai_api_key
+```
+
+### 4. Run the application locally
+
+```bash
+npm run dev
+```
+
+This will start the application locally at `http://localhost:3000`.
+
+## Usage
+
+- **Browse Repositories**: Connect to your GitHub account and select repositories to explore.
+- **View Commit Summaries**: Navigate through commits and see AI-generated summaries of the changes.
+- **Ask the AI Chatbot**: Interact with the chatbot to ask about repository files, usage, and project context.
+
+## Contributing
+
+We welcome contributions to improve **Codebase AI**! If you'd like to contribute, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-name`).
+3. Make your changes.
+4. Commit your changes (`git commit -am 'Add new feature'`).
+5. Push to the branch (`git push origin feature-name`).
+6. Open a pull request.
+
+
+
